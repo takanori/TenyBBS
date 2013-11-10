@@ -41,9 +41,22 @@ sub slurp {
 
 # initialize database
 use TenyBBS;
+use Time::Piece;
 {
     unlink 'db/test.db' if -f 'db/test.db';
     system("sqlite3 db/test.db < sql/sqlite.sql");
+
+    my $teny = TenyBBS->new;
+    my $db = $teny->db;
+    my @threads = (
+        { title => 'Perlについて語ろう', content => 'syntaxがマジでカオス' },
+        { title => '[進捗]修論詰んだ[どうですか？]', content => 'おわた' },
+        { title => 'ねむい', content => 'ねむい' },
+    );
+    for my $th (@threads) {
+        $th->{created_at} = Time::Piece->new;
+        $db->insert(thread => $th);
+    }
 }
 
 

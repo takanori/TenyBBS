@@ -6,21 +6,6 @@ use Plack::Test;
 use Plack::Util;
 use Test::More;
 
-my $teny = TenyBBS->new;
-my $db = $teny->db;
-{
-    # DB setup
-
-    my @titles = qw/foo bar baz/;
-    for my $title (@titles) {
-        $db->insert(thread => {
-            title => $title,
-            created_at => Time::Piece->new,
-        });
-    }
-}
-
-
 my $app = Plack::Util::load_psgi 'script/tenybbs-server';
 
 sub expect_res {
