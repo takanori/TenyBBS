@@ -1,0 +1,15 @@
+: cascade "include/layout.tx"
+
+: override content -> {
+
+<h1>New Thread</h1>
+<form role="form" class="col-lg-4" method="POST" action="<: uri_for('/thread') :>">
+  <div class="form-group">
+    <label for="form-title">Title</label>
+    <input id="form-title" class="form-control" type="text" name="title">
+  </div>
+  <button class="btn btn-default" type="submit">Submit</button>
+</form>
+
+: }
+
