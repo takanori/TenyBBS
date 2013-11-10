@@ -24,8 +24,10 @@ get '/thread/new' => sub {
 post '/thread' => sub {
     my ($c) = @_;
     my $title = $c->req->param('title');
+    my $content = $c->req->param('content');
     $c->db->insert(thread => {
         title => $title,
+        content => $content,
         created_at => Time::Piece->new
     });
     return $c->redirect('/thread');

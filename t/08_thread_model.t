@@ -17,7 +17,8 @@ my $db = $teny->db;
     my @titles = qw/foo bar baz/;
     for my $title (@titles) {
         $db->insert(thread => {
-            title => $title,
+            title      => $title,
+            content    => 'hogehogehoge',
             created_at => Time::Piece->new,
         });
     }
@@ -25,6 +26,6 @@ my $db = $teny->db;
 
 # test
 my @res = $db->search('thread');
-cmp_ok @res, '==', 3;
+is @res, 3;
 
 done_testing;
