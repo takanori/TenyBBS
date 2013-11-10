@@ -1,0 +1,12 @@
+: cascade "include/layout.tx"
+
+: override content -> {
+
+<h1>Threads</h1>
+<ul>
+: for $threads -> $th {
+  <li><: $th.title :></li>
+: }
+</ul>
+
+: }

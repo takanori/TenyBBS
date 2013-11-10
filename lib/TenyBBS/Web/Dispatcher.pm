@@ -9,6 +9,16 @@ any '/' => sub {
     return $c->render('index.tx');
 };
 
+get '/thread' => sub {
+    my ($c) = @_;
+    my @threads = (
+        { title => 'foo', },
+        { title => 'bar', },
+        { title => 'baz', },
+    );
+    return $c->render('thread/index.tx', { threads => \@threads });
+};
+
 post '/account/logout' => sub {
     my ($c) = @_;
     $c->session->expire();
