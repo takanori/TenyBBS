@@ -1,0 +1,3 @@
+name="TenyBBS"
+[build]
+build_class = "builder::MyBuilder"
