@@ -31,6 +31,14 @@ post '/thread' => sub {
     return $c->redirect('/thread');
 };
 
+get '/thread/:id' => sub {
+    my ($c, $args) = @_;
+    my $id = $args->{id};
+    my $thread = $c->db->single(thread => { id => $id });
+    return $c->res_404 unless $thread;
+    return $c->render('thread/show.tx', { thread => $thread });
+};
+
 post '/account/logout' => sub {
     my ($c) = @_;
     $c->session->expire();

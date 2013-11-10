@@ -6,24 +6,39 @@ use Plack::Test;
 use Plack::Util;
 use Test::More;
 
+my $teny = TenyBBS->new;
+my $db = $teny->db;
+{
+    # DB setup
+
+    my @titles = qw/foo bar baz/;
+    for my $title (@titles) {
+        $db->insert(thread => {
+            title => $title,
+            created_at => Time::Piece->new,
+        });
+    }
+}
+
+
 my $app = Plack::Util::load_psgi 'script/tenybbs-server';
 
-# スレッド一覧ページを開く
-
-sub expect_200 {
-    my ($cb, $method, $url) = @_;
+sub expect_res {
+    my ($stat, $cb, $method, $url) = @_;
     my $req = HTTP::Request->new($method => $url);
     my $res = $cb->($req);
-    is $res->code, 200;
-    diag $res->content if $res->code != 200;
+    is $res->code, $stat;
+    diag $res->content if $res->code != $stat;
 }
 
 test_psgi
     app => $app,
     client => sub {
         my $cb = shift;
-        expect_200($cb, GET => 'http://localhost/thread');
-        expect_200($cb, GET => 'http://localhost/thread/new');
+        expect_res(200, $cb, GET => 'http://localhost/thread');
+        expect_res(200, $cb, GET => 'http://localhost/thread/new');
+        expect_res(200, $cb, GET => 'http://localhost/thread/1');
+        expect_res(404, $cb, GET => 'http://localhost/thread/4');
     };
 
 
