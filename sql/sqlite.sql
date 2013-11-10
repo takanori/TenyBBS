@@ -1,4 +1,5 @@
-CREATE TABLE IF NOT EXISTS member (
-    id           INTEGER NOT NULL PRIMARY KEY,
-    name         VARCHAR(255)
+CREATE TABLE IF NOT EXISTS thread (
+  id         INTEGER PRIMARY KEY AUTOINCREMENT,
+  title      TEXT,
+  created_at INTEGER
 );

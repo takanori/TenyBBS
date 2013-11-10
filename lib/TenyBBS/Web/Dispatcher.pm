@@ -11,11 +11,7 @@ any '/' => sub {
 
 get '/thread' => sub {
     my ($c) = @_;
-    my @threads = (
-        { title => 'foo', },
-        { title => 'bar', },
-        { title => 'baz', },
-    );
+    my @threads = $c->db->search('thread');
     return $c->render('thread/index.tx', { threads => \@threads });
 };
 
