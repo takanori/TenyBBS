@@ -1,3 +1,4 @@
+# Amon2
 Makefile
 /inc/
 MANIFEST
@@ -16,3 +17,15 @@ MYMETA.yml
 /_build/
 /local/
 /.carton/
+cover_db
+junit_output.xml
+
+# Vim
+*.sw[po]
+*~
+.local.vimrc
+tags
+
+# Others
+*.tar.gz
+.DS_Store
