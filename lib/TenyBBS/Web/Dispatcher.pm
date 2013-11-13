@@ -38,9 +38,22 @@ get '/thread/:id' => sub {
     my $id = $args->{id};
     my $thread = $c->db->single(thread => { id => $id });
     return $c->res_404 unless $thread;
-    my $responses = $c->db->search(response => { id => $thread->id });
+    my @responses = $c->db->search(response => { thread_id => $thread->id });
 
-    return $c->render('thread/show.tx', { thread => $thread, responses => $responses });
+    return $c->render('thread/show.tx', { thread => $thread, responses => \@responses });
+};
+
+post '/thread/:id/response' => sub {
+    my ($c, $args) = @_;
+    my $id = $args->{id};
+    my $content = $c->req->param('content');
+    $c->db->insert(response => {
+        thread_id  => $id,
+        content    => $content,
+        created_at => Time::Piece->new
+    });
+
+    return $c->redirect("/thread/$id");
 };
 
 post '/account/logout' => sub {
