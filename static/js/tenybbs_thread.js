@@ -39,11 +39,13 @@ $(document).ready(function() {
 	});
 
 	function addNewThread(threadData) {
+    debugPrint('addnewthread' + threadData);
 		$.ajax({
 			type: 'POST',
 			url: '/thread/insert',
 			data: threadData,
 			success: function(data) {
+        debugPrint('addnewthread success' + data);
 				if (data.thread) {
 					rawThreads.unshift(data.thread);
 					refreshThreads(rawThreads);
@@ -221,11 +223,10 @@ $(document).ready(function() {
 
 	// debug ========================================================================
 
-	/*
-	function debugPrint(str) {
-		var	area = $('#debug');
-		if (!area) return;
-		area.val(area.val() + str + '\n');
-	}
-	*/
+  function debugPrint(str) {
+    var	area = $('#debug');
+    if (!area) return;
+    area.val(area.val() + str + '\n');
+  }
+  
 });
