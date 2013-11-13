@@ -57,6 +57,17 @@ use Time::Piece;
         $th->{created_at} = Time::Piece->new;
         $db->insert(thread => $th);
     }
+
+    my %responses = (
+        1 => ['確かに', 'いやそれがいいんだろ'],
+        2 => ['頑張って^^'],
+        3 => ['俺も', '俺も', '俺も'],
+    );
+    for my $id (keys(%responses)) {
+        for my $response (@{$responses{$id}}) {
+            $db->insert(response => { thread_id => $id, content => $response, created_at => Time::Piece->new });
+        }
+    }
 }
 
 

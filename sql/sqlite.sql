@@ -7,6 +7,7 @@ CREATE TABLE IF NOT EXISTS thread (
 
 CREATE TABLE IF NOT EXISTS response (
   id         INTEGER PRIMARY KEY AUTOINCREMENT,
+  thread_id  INTEGER,
   content    TEXT,
   created_at INTEGER
 );

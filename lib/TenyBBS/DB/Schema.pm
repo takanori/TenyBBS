@@ -28,7 +28,7 @@ table {
 table {
     name 'response';
     pk 'id';
-    columns qw/id content created_at/;
+    columns qw/id thread_id content created_at/;
     inflate qr/.+_at/ => $time_inflate;
     deflate qr/.+_at/ => $time_deflate;
 };
