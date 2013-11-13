@@ -38,7 +38,9 @@ get '/thread/:id' => sub {
     my $id = $args->{id};
     my $thread = $c->db->single(thread => { id => $id });
     return $c->res_404 unless $thread;
-    return $c->render('thread/show.tx', { thread => $thread });
+    my $responses = $c->db->search(response => { id => $thread->id });
+
+    return $c->render('thread/show.tx', { thread => $thread, responses => $responses });
 };
 
 post '/account/logout' => sub {

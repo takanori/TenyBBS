@@ -6,4 +6,11 @@
 
 <p><: $thread.content :></p>
 
+<ul>
+: for $responses -> $response {
+  <li><: $response.content :></li>
+: }
+</ul>
+
+
 : }
