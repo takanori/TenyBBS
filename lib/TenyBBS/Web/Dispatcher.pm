@@ -7,7 +7,7 @@ use Time::Piece;
 
 any '/' => sub {
     my ($c) = @_;
-    return $c->render('index.tx');
+    return $c->redirect('/thread');
 };
 
 get '/thread' => sub {

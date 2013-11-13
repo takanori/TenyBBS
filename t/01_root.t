@@ -13,7 +13,7 @@ test_psgi
         my $cb = shift;
         my $req = HTTP::Request->new(GET => 'http://localhost/');
         my $res = $cb->($req);
-        is $res->code, 200;
+        is $res->code, 302;
         diag $res->content if $res->code != 200;
     };
 

@@ -20,6 +20,7 @@ test_psgi
     app => $app,
     client => sub {
         my $cb = shift;
+        expect_res(302, $cb, GET => 'http://localhost/');
         expect_res(200, $cb, GET => 'http://localhost/thread');
         expect_res(200, $cb, GET => 'http://localhost/thread/new');
         expect_res(200, $cb, GET => 'http://localhost/thread/1');
