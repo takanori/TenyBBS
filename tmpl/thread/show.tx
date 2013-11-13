@@ -1,0 +1,33 @@
+: cascade "include/layout.tx"
+
+: override content -> {
+
+<h2>Thread: <: $thread_id :></h2>
+
+<form id="insert-form" action="#">
+    <div class="clearfix">
+        <p>Author</p>
+        <textarea class="author-name-input form-control col-xs-12" name="author_name" rows="1" placeholder="Write your name here"></textarea><br>
+        <p>Content</p>
+        <textarea class="content-input form-control col-xs-12" name="content" rows="3" placeholder="Write your content here"></textarea><br>
+        <input class="thread-id" type="hidden" name="thread_id" value="<: $thread_id :>">
+    </div>
+    <div class="actions">
+        <input type="button" id="tb-insert-btn" class="btn btn-primary" value="Submit">
+    </div>
+</form>
+
+<hr>
+
+<div id="tb-entries" class="clearfix"></div>
+
+<textarea id="debug" class="col-xs-6" rows="10"></textarea>
+
+: }
+
+
+: override jsforeachpage -> {
+
+<script src="<: uri_for('/static/js/tenybbs_entry.js') :>"></script>
+
+: }

@@ -5,17 +5,19 @@ $(document).ready(function() {
 	tbEntries.addClass('tb-entries');
 	tbEntries.append(
 		'<table class="table well">' +
-		'<thead><tr><th class="col-md-9">content</th><th class="col-md-2">created_at</th><th class="col-md-1"></th></tr></thead>' +
-		'<tbody class="tb-thread-list"></tbody></table>'
+		'<thead><tr><th class="col-md-2">author</th><th class="col-md-7">content</th><th class="col-md-2">created_at</th><th class="col-md-1"></th></tr></thead>' +
+		'<tbody class="tb-entry-list"></tbody></table>'
 	);
 
-	var tbEntryList = tbEntries.find('.tb-thread-list');
+	var tbEntryList = tbEntries.find('.tb-entry-list');
 	var rawEntries = [];
 	var insertForm = $('#insert-form');
+  var threadId = insertForm.find('.thread-id').val();
 
 	$.ajax({
 		type: 'GET',
 		url: '/entry/all',
+    data: { thread_id : threadId },
 		success: function(data) {
 			if (data.entries) {
 				rawEntries = data.entries;
@@ -28,6 +30,7 @@ $(document).ready(function() {
 
 	// insert ==========================================================
 
+	var authorNameInput = insertForm.find('.author-name-input');
 	var contentInput = insertForm.find('.content-input');
 	$('#tb-insert-btn').on('click', function() {
 		if (!contentInput.val())
@@ -199,6 +202,7 @@ $(document).ready(function() {
 		for (var i = 0; i < entries.length; i++) {
 			var str = '';
 			str += '<tr id="' + entries[i].id + '" class="tb-entry-row">';
+			str += '<td class="entry-author-name">' + htmlEscape(entries[i].author_name) + '</td>';
 			str += '<td class="entry-content">' + htmlEscape(entries[i].content) + '</td>';
 			str += '<td><small class="text-muted">' + htmlEscape(entries[i].created_at) + '</small></td>';
 			str += '<td><span class="delete-btn"><i class="icon-remove-sign"></i></span></td></tr>';
@@ -214,11 +218,11 @@ $(document).ready(function() {
 
 	// debug ========================================================================
 
-	/*
-	function debugPrint(str) {
-		var	area = $('#debug');
-		if (!area) return;
-		area.val(area.val() + str + '\n');
-	}
-	*/
+  
+  function debugPrint(str) {
+    var	area = $('#debug');
+    if (!area) return;
+    area.val(area.val() + str + '\n');
+  }
+  
 });

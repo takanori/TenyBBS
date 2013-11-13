@@ -205,7 +205,7 @@ $(document).ready(function() {
 		for (var i = 0; i < threads.length; i++) {
 			var str = '';
 			str += '<tr id="' + threads[i].id + '" class="tb-row">';
-			str += '<td class="thread-title">' + htmlEscape(threads[i].title) + '</td>';
+			str += '<td class="thread-title"><a href="/thread/id/' + threads[i].id + '">' + htmlEscape(threads[i].title) + '</td>';
 			str += '<td class="thread-content">' + htmlEscape(threads[i].content) + '</td>';
 			str += '<td><small class="text-muted">' + htmlEscape(threads[i].updated_at) + '</small></td>';
 			str += '<td><span class="delete-btn"><i class="icon-remove-sign"></i></span></td></tr>';
