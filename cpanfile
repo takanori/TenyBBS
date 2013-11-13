@@ -17,6 +17,7 @@ requires 'perl', '5.010_001';
 # TODO
 # DateTime;
 # Data::GUID::URLSafe;
+# Log::Tiny;
 
 on configure => sub {
     requires 'Module::Build', '0.38';

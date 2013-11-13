@@ -32,7 +32,7 @@ sub insert_thread {
     my ( $self, $args ) = @_;
     my $row = $self->insert(
         'threads',
-        {   title      => $args->{id},
+        {   title      => $args->{title},
             content    => $args->{content},
             created_at => $self->current_time,
             updated_at => $self->current_time,

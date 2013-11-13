@@ -35,17 +35,15 @@ $(document).ready(function() {
 			return;
 
 		addNewThread(insertForm.serialize());
-		contentInput.focus();
+		titleInput.focus();
 	});
 
 	function addNewThread(threadData) {
-    debugPrint('addnewthread' + threadData);
 		$.ajax({
 			type: 'POST',
 			url: '/thread/insert',
 			data: threadData,
 			success: function(data) {
-        debugPrint('addnewthread success' + data);
 				if (data.thread) {
 					rawThreads.unshift(data.thread);
 					refreshThreads(rawThreads);

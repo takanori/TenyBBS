@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS threads (
 	id       INTEGER PRIMARY KEY AUTO_INCREMENT,
-	title    TEXT NOT NULL,
+	title    TEXT,
 	content  TEXT,
 	created_at DATETIME NOT NULL,
 	updated_at DATETIME NOT NULL,
