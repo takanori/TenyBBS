@@ -20,7 +20,15 @@ my $time_deflate = sub {
 table {
     name 'thread';
     pk 'id';
-    columns qw(id title content created_at);
+    columns qw/id title content created_at/;
+    inflate qr/.+_at/ => $time_inflate;
+    deflate qr/.+_at/ => $time_deflate;
+};
+
+table {
+    name 'response';
+    pk 'id';
+    columns qw/id content created_at/;
     inflate qr/.+_at/ => $time_inflate;
     deflate qr/.+_at/ => $time_deflate;
 };

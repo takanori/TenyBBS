@@ -11,7 +11,8 @@ my $teny = TenyBBS->new;
 my $db = $teny->db;
 
 
-my @res = $db->search('thread');
-is @res, 3;
+my @res = $db->search('response');
+
+pass 'Can select from response';
 
 done_testing;
