@@ -79,7 +79,7 @@ sub all_entries {
     my ( $self, $args ) = @_;
     my $itr = $self->search(
         'entries',
-        { id       => $args->{thread_id} },
+        { thread_id       => $args->{thread_id} },
         { order_by => { 'created_at' => 'DESC' } },
     );
 
