@@ -9,7 +9,6 @@ use Log::Minimal;
 # Index =============================================================
 
 any '/' => sub {
-    infof("\n\nindex\n\n");
     my ($c) = @_;
     return $c->redirect('/thread');    # TODO
 };
