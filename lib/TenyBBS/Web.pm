@@ -16,7 +16,8 @@ __PACKAGE__->load_plugins(
     'Web::FillInFormLite',
     'Web::JSON',
     'Web::CSRFDefender' => {
-        post_only => 0,  # TODO
+        no_validate_hook => 1,    # TODO
+        post_only        => 1,
     },
 );
 

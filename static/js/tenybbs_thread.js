@@ -194,10 +194,6 @@ $(document).ready(function() {
 
 	// helper ========================================================================
 
-		'<table class="table well">' +
-		'<thead><tr><th class="col-md-3">title</th><th class="col-md-6">content</th><th class="col-md-2">updated_at</th><th class="col-md-1"></th></tr></thead>' +
-		'<tbody class="tb-thread-list"></tbody></table>'
-
 	function refreshThreads(threads) {
 		// debugPrint('refreshThreads threads.length: ' + threads.length);
 		

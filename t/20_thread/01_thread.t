@@ -20,14 +20,18 @@ test_psgi
     app    => $app,
     client => sub {
         my $cb = shift;
-        expect_res( 200, $cb, GET => 'http://localhost/thread' );
-        expect_res( 200, $cb, GET => 'http://localhost/thread/insert' );
-        expect_res( 200, $cb, GET => 'http://localhost/thread/search' );
-        expect_res( 200, $cb, GET => 'http://localhost/thread/update' );
-        expect_res( 200, $cb, GET => 'http://localhost/thread/delete' );
+        expect_res( 200, $cb, GET  => 'http://localhost/thread' );
+        expect_res( 200, $cb, GET  => 'http://localhost/api/thread/all' );
+        expect_res( 200, $cb, POST => 'http://localhost/api/thread/insert' );
 
-        # TODO access thread contents
-        # expect_res( 200, $cb, GET => 'http://localhost/thread/:GUID_FOR_TEST_THREAD' );
+        TODO: {
+            # expect_res( 200, $cb, GET => 'http://localhost/thread/update' );
+            # expect_res( 200, $cb, GET => 'http://localhost/thread/delete' );
+
+            # TODO access thread contents
+            # expect_res( 200, $cb, GET => 'http://localhost/thread/:GUID_FOR_TEST_THREAD' );
+        }
+
     };
 
 done_testing;
