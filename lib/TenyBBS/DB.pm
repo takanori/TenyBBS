@@ -117,7 +117,7 @@ sub update_entry {
         },
         { id => $args->{id}, },
     );
-    my $row = $self->single( 'entries', { id => $args->{id}, } );
+    my $row = $self->single( 'threads', { id => $args->{id}, } );
     return $row->get_columns;
 }
 
