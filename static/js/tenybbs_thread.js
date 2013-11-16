@@ -56,76 +56,79 @@ $(document).ready(function() {
     }
 
     // update =======================================================================
-    // TODO 
 
-    // var contentBeforeEdit = '';
-    // $(tbThreadList).on('dblclick', '.todo-content', function() {
-    //   // debugPrint('tb-row dblclicked');
+    var titleBeforeChange = '';
+    var contentBeforeChange = '';
+    $(tbThreadList).on('click', '.update-btn', function() {
+        var threadTr = $(this).parent().parent();
 
-    //   var existingInput = $(tbThreadList).find('.tb-row-input');
-    //   if (existingInput) {
-    //     existingInput.parent().text(contentBeforeEdit);
-    //     existingInput.remove();
-    //   }
+        var existingTitleInput = $(tbThreadList).find('.tb-update-title');
+        if (existingTitleInput) {
+            var existingContentInput = existingTitleInput.parent().parent().find('.tb-update-content');
+            existingTitleInput.parent().text(titleBeforeChange);
+            existingTitleInput.remove();
+            existingContentInput.parent().text(contentBeforeChange);
+            existingContentInput.remove();
+        }
 
-    //   var todoId = $(this).parent().attr('id');
-    //   var contentTd = $(this);
-    //   var todoContent = contentTd.text();
+        var threadId = threadTr.attr('id');
+        var titleTd = threadTr.children('.thread-title');
+        var contentTd = threadTr.children('.thread-content');
+        titleBeforeChange = titleTd.text();
+        contentBeforeChange = contentTd.text();
 
-    //   contentBeforeEdit = todoContent;
-    //   contentTd.text('');
+        titleTd.text('');
+        contentTd.text('');
 
-    //   var updateTextArea = $('<textarea class="col-xs-12 tb-row-input" rows="4">' + htmlEscape(todoContent).replace(/\"/g, [>"<] '&quot;') + '</textarea>');
-    //   updateTextArea.appendTo(contentTd).focus();
+        var titleArea = $('<textarea class="col-xs-12 tb-update-title" rows="2">' + htmlEscape(titleBeforeChange).replace(/\"/g, '&quot;') + '</textarea>');
+        var contentArea = $('<textarea class="col-xs-12 tb-update-content" rows="4">' + htmlEscape(contentBeforeChange).replace(/\"/g, '&quot;') + '</textarea>');
+        titleArea.appendTo(titleTd).focus();
+        contentArea.appendTo(contentTd);
 
-    //   var submitBtn = $('<input type="button" class="update-btn btn btn-primary btn-xs" name="submit-update" value="Submit">').on('click', function() {
+        var submitBtn = $('<input type="button" class="update-submit-btn btn btn-primary btn-xs" name="update-submit" value="Submit">').on('click', function() {
 
-    //     // Update todo
-    //     var tbRowInput = $(this).siblings('.tb-row-input');
-    //     var newContent = tbRowInput.val();
-    //     var newDone = $(this).parent().siblings('td:first').children().prop('checked') ? 1 : 0;
+            var newTitle = titleArea.val();
+            var newContent = contentArea.val();
 
-    //     if (!newContent)
-    //       return;
+            if (!newContent) {
+                return;
+            }
 
-    //     $.ajax({
-    //       type: 'PUT',
-    //       url: '/todos/update',
-    //       data: {
-    //         todo_id: todoId,
-    //         content: newContent,
-    //         done: newDone,
-    //       },
-    //       success: function(data) {
-    //         if (data.todo) {
-    //           updateCache(data.todo);
-    //           refreshThreads(rawThreads);
-    //         }
-    //       },
-    //     });
+            $.ajax({
+                type: 'POST',
+                url: '/api/thread/update',
+                data: {
+                    id: threadId,
+                    title: newTitle,
+                    content: newContent,
+                },
+                success: function(data) {
+                    if (data.thread) {
+                        console.log(data.thread);
+                        updateCache(data.thread);
+                        refreshThreads(rawThreads);
+                    }
+                    else {
+                        console.log("Error. Could not get updated thread.");
+                    }
+                },
+            });
 
-    //     tbRowInput.val('');
-    //     contentInput.focus();
+            titleInput.focus();
 
-    //     if (intro) {
-    //       intro.exit();
-    //     }
-    //   });
-    //   updateTextArea.after(submitBtn);
+        });
+        contentArea.after(submitBtn);
+    });
 
-    //   if (intro) {
-    //     intro.refresh();
-    //   }
-    // });
-
-    // function updateCache(todo) {
-    //   for (var i = 0; i < rawThreads.length; i++) {
-    //     if (rawThreads[i].id == todo.id) {
-    //       rawThreads[i] = todo;
-    //       break;
-    //     }
-    //   }
-    // }
+    function updateCache(thread) {
+        var threadId = thread.id;
+        for (var i = 0; i < rawThreads.length; i++) {
+            if (rawThreads[i].id == threadId) {
+                rawThreads[i] = thread;
+                break;
+            }
+        }
+    }
 
     // update done only =======================================================================
     // TODO

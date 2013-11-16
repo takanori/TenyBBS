@@ -14,9 +14,9 @@ requires 'Text::Xslate',                    '2.0009';
 requires 'Time::Piece',                     '1.20';
 requires 'perl',                            '5.010_001';
 
-requires 'DateTime'                         '1.03';
-requires 'Data::GUID::URLSafe'              '0.006';
-requires 'Log::Minimal'                     '0.16';
+requires 'DateTime',                        '1.03';
+requires 'Data::GUID::URLSafe',             '0.006';
+requires 'Log::Minimal',                    '0.16';
 requires 'DBD::mysql',                      '4.025';
 
 on configure => sub {

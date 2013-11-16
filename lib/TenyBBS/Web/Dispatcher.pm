@@ -40,11 +40,11 @@ post '/api/thread/insert' => sub {
 };
 
 post '/api/thread/update' => sub {
-    my ($c)   = @_;
-    my $id    = $c->req->param('id');
-    my $title = $c->req->param('title');
-    my $content => $c->req->param('content');
-    my $thread = $c->db->insert_thread(
+    my ($c)     = @_;
+    my $id      = $c->req->param('id');
+    my $title   = $c->req->param('title');
+    my $content = $c->req->param('content');
+    my $thread  = $c->db->update_thread(
         {   id      => $id,
             title   => $title,
             content => $content,

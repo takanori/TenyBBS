@@ -6,6 +6,8 @@ use parent qw(Teng);
 
 use DateTime;
 use Data::GUID::URLSafe;
+use YAML;
+use Log::Minimal;
 
 __PACKAGE__->load_plugin('Count');
 __PACKAGE__->load_plugin('Replace');
@@ -46,11 +48,13 @@ sub update_thread {
     my $updated_count = $self->update(
         'threads',
         {   title      => $args->{title},
-            content    => $args->{contnet},
+            content    => $args->{content},
             updated_at => $self->current_time,
         },
         { id => $args->{id} },
     );
+    infof(Dump($args));
+
     my $row = $self->single( 'threads', { id => $args->{id}, } );
     return $row->get_columns;
 }

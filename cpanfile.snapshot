@@ -198,6 +198,21 @@ DISTRIBUTIONS
       Test::More 0.47
       Tie::Hash 0
       perl 5.006
+  DBD-mysql-4.025
+    pathname: C/CA/CAPTTOFU/DBD-mysql-4.025.tar.gz
+    provides:
+      Bundle::DBD::mysql 4.025
+      DBD::mysql 4.025
+      DBD::mysql::GetInfo undef
+      DBD::mysql::db 4.025
+      DBD::mysql::dr 4.025
+      DBD::mysql::st 4.025
+    requirements:
+      DBI 1.08
+      Data::Dumper 0
+      Test::Deep 0
+      Test::More 0
+      perl 5.008001
   DBI-1.630
     pathname: T/TI/TIMB/DBI-1.630.tar.gz
     provides:
@@ -1803,6 +1818,18 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 6.52
       Test::More 0.82
       perl 5.00503
+  Log-Minimal-0.16
+    pathname: K/KA/KAZEBURO/Log-Minimal-0.16.tar.gz
+    provides:
+      Log::Minimal 0.16
+    requirements:
+      CPAN::Meta 0
+      CPAN::Meta::Prereqs 0
+      Data::Dumper 0
+      ExtUtils::CBuilder 0
+      Module::Build 0.38
+      Scalar::Util 0
+      Term::ANSIColor 0
   MRO-Compat-0.12
     pathname: B/BO/BOBTFISH/MRO-Compat-0.12.tar.gz
     provides:
