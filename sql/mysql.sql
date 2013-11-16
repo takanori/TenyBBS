@@ -14,6 +14,6 @@ CREATE TABLE IF NOT EXISTS entries (
 	content     TEXT,
 	created_at  DATETIME NOT NULL,
 	updated_at  DATETIME NOT NULL,
-	FOREIGN KEY(thread_id) REFERENCES threads(id),
+	FOREIGN KEY(thread_id) REFERENCES threads(id) ON DELETE CASCADE,
     INDEX created_at(created_at)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

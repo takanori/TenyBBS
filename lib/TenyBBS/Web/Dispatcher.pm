@@ -56,7 +56,7 @@ post '/api/thread/update' => sub {
 post '/api/thread/delete' => sub {
     my ($c) = @_;
     my $id = $c->req->param('id');
-    my $deleted_count = $c->db->insert_thread( { id => $id } );
+    my $deleted_count = $c->db->delete_thread( { id => $id } );
     return $c->render_json( { deleted_count => $deleted_count } );
 };
 
@@ -106,8 +106,9 @@ post '/api/entry/update' => sub {
 post '/api/entry/delete' => sub {
     my ($c) = @_;
     my $id = $c->req->param('id');
-    my $thread = $c->db->insert_thread( { id => $id, } );
-    return $c->render_json( { thread => $thread } );
+    my $deleted_count = $c->db->delete_entry( { id => $id } );
+    warnf ($deleted_count);
+    return $c->render_json( { deleted_count => $deleted_count } );
 };
 
 1;

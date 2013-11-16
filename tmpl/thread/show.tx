@@ -21,8 +21,6 @@
 
 <div id="tb-entries" class="clearfix"></div>
 
-<textarea id="debug" class="col-xs-6" rows="10"></textarea>
-
 : }
 
 

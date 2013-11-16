@@ -124,8 +124,8 @@ sub update_entry {
 sub delete_entry {
     my ($self, $args) = @_;
     my $deleted_count = $self->delete(
-        'entires',
-        { id => $args->{id}, },
+        'entries',
+        { id => $args->{id} },
     );
     return $deleted_count;
 }
