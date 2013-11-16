@@ -15,7 +15,7 @@ $(document).ready(function() {
 
 	$.ajax({
 		type: 'GET',
-		url: '/thread/all',
+		url: '/api/thread/all',
 		success: function(data) {
 			if (data.threads) {
 				rawThreads = data.threads;
@@ -41,7 +41,7 @@ $(document).ready(function() {
 	function addNewThread(threadData) {
 		$.ajax({
 			type: 'POST',
-			url: '/thread/insert',
+			url: '/api/thread/insert',
 			data: threadData,
 			success: function(data) {
 				if (data.thread) {

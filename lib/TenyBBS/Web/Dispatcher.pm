@@ -4,30 +4,32 @@ use warnings;
 use utf8;
 use Amon2::Web::Dispatcher::RouterBoom;
 
-# Threads ===========================================================
+# Index =============================================================
 
 any '/' => sub {
     my ($c) = @_;
-    return $c->render('index.tx');
+    return $c->redirect('/thread');    # TODO
 };
+
+# Threads ===========================================================
 
 get '/thread' => sub {
     my ($c) = @_;
     return $c->render('thread/index.tx');
 };
 
-get '/thread/all' => sub {
+get '/api/thread/all' => sub {
     my ($c) = @_;
     my $threads = $c->db->all_threads;
 
-    $c->render_json({threads => $threads});
+    $c->render_json( { threads => $threads } );
 };
 
-post '/thread/insert' => sub {
-    my ($c) = @_;
-    my $title = $c->req->param('title');
+post '/api/thread/insert' => sub {
+    my ($c)     = @_;
+    my $title   = $c->req->param('title');
     my $content = $c->req->param('content');
-    my $thread = $c->db->insert_thread(
+    my $thread  = $c->db->insert_thread(
         {   title   => $title,
             content => $content,
         }
@@ -35,7 +37,7 @@ post '/thread/insert' => sub {
     return $c->render_json( { thread => $thread } );
 };
 
-post '/thread/update' => sub {
+post '/api/thread/update' => sub {
     my ($c)   = @_;
     my $id    = $c->req->param('id');
     my $title = $c->req->param('title');
@@ -49,7 +51,7 @@ post '/thread/update' => sub {
     return $c->render_json( { thread => $thread } );
 };
 
-post '/thread/delete' => sub {
+post '/api/thread/delete' => sub {
     my ($c) = @_;
     my $id = $c->req->param('id');
     my $deleted_count = $c->db->insert_thread( { id => $id } );
@@ -63,7 +65,7 @@ get '/thread/id/:id' => sub {
     return $c->render( 'thread/show.tx', { thread_id => $args->{id} } );
 };
 
-get '/entry/all' => sub {
+get '/api/entry/all' => sub {
     my ($c) = @_;
     my $thread_id = $c->req->param('thread_id');
     my $entries = $c->db->all_entries( { thread_id => $thread_id } );
@@ -71,7 +73,7 @@ get '/entry/all' => sub {
     $c->render_json( { entries => $entries } );
 };
 
-post '/entry/insert' => sub {
+post '/api/entry/insert' => sub {
     my ($c)         = @_;
     my $thread_id   = $c->req->param('thread_id');
     my $author_name = $c->req->param('author_name');
@@ -85,7 +87,7 @@ post '/entry/insert' => sub {
     return $c->render_json( { entry => $entry } );
 };
 
-post '/entry/update' => sub {
+post '/api/entry/update' => sub {
     my ($c)         = @_;
     my $id          = $c->req->param('id');
     my $author_name = $c->req->param('author_name');
@@ -99,7 +101,7 @@ post '/entry/update' => sub {
     return $c->render_json( { entry => $entry } );
 };
 
-post '/entry/delete' => sub {
+post '/api/entry/delete' => sub {
     my ($c) = @_;
     my $id = $c->req->param('id');
     my $thread = $c->db->insert_thread( { id => $id, } );

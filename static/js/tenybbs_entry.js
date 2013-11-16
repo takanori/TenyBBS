@@ -16,7 +16,7 @@ $(document).ready(function() {
 
 	$.ajax({
 		type: 'GET',
-		url: '/entry/all',
+		url: '/api/entry/all',
     data: { thread_id : threadId },
 		success: function(data) {
 			if (data.entries) {
@@ -43,7 +43,7 @@ $(document).ready(function() {
 	function addNewEntry(entryData) {
 		$.ajax({
 			type: 'POST',
-			url: '/entry/insert',
+			url: '/api/entry/insert',
 			data: entryData,
 			success: function(data) {
 				if (data.entry) {
