@@ -208,7 +208,8 @@ $(document).ready(function() {
 			str += '<td class="thread-title"><a href="/thread/id/' + threads[i].id + '">' + htmlEscape(threads[i].title) + '</td>';
 			str += '<td class="thread-content">' + htmlEscape(threads[i].content) + '</td>';
 			str += '<td><small class="text-muted">' + htmlEscape(threads[i].updated_at) + '</small></td>';
-			str += '<td><span class="delete-btn"><i class="icon-remove-sign"></i></span></td></tr>';
+			str += '<td><span class="delete-btn glyphicon glyphicon-remove"></span></td></tr>';
+			// str += '<td><span class="delete-btn"><i class="icon-remove-sign"></i></span></td></tr>';
 
 			tbThreadList.append(str);
 		}

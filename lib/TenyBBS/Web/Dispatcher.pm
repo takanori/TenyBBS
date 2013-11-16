@@ -4,6 +4,8 @@ use warnings;
 use utf8;
 use Amon2::Web::Dispatcher::RouterBoom;
 
+use Log::Minimal;
+
 # Index =============================================================
 
 any '/' => sub {

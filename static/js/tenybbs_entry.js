@@ -205,7 +205,7 @@ $(document).ready(function() {
 			str += '<td class="entry-author-name">' + htmlEscape(entries[i].author_name) + '</td>';
 			str += '<td class="entry-content">' + htmlEscape(entries[i].content) + '</td>';
 			str += '<td><small class="text-muted">' + htmlEscape(entries[i].created_at) + '</small></td>';
-			str += '<td><span class="delete-btn"><i class="icon-remove-sign"></i></span></td></tr>';
+			str += '<td><span class="delete-btn glyphicon glyphicon-remove"></span></td></tr>';
 
 			tbEntryList.append(str);
 		}
