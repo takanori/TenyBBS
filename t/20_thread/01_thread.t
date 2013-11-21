@@ -2,14 +2,13 @@ use strict;
 use warnings;
 use utf8;
 use t::Util;
-use Plack::Test;
 use Plack::Util;
+use Plack::Test;
 use Test::More;
-use Test::Harness;
+use Test::WWW::Mechanize::PSGI;
 
 my $app = Plack::Util::load_psgi 'script/tenybbs-server';
-
-plan skip_all => 'not yet';
+my $mech = Test::WWW::Mechanize::PSGI->new(app => $app);
 
 sub expect_res {
     my ( $stat, $cb, $method, $url ) = @_;
@@ -19,19 +18,26 @@ sub expect_res {
     diag $res->content if $res->code != $stat;
 }
 
-test_psgi
-    app    => $app,
-    client => sub {
-        my $cb = shift;
-        expect_res( 200, $cb, GET  => 'http://localhost/thread' );
-        expect_res( 200, $cb, GET  => 'http://localhost/api/thread/all' );
-        expect_res( 200, $cb, POST => 'http://localhost/api/thread/insert' );
+subtest 'index' => sub {
+    test_psgi
+        app    => $app,
+        client => sub {
+            my $cb = shift;
+            expect_res( 302, $cb, GET  => '/' );
+            expect_res( 200, $cb, GET  => '/thread' );
+            expect_res( 200, $cb, GET  => '/api/thread/all' );
+            expect_res( 200, $cb, POST => '/api/thread/insert' );
 
-        # expect_res( 200, $cb, GET => 'http://localhost/thread/update' );
-        # expect_res( 200, $cb, GET => 'http://localhost/thread/delete' );
+            # expect_res( 200, $cb, GET => 'http://localhost/thread/update' );
+            # expect_res( 200, $cb, GET => 'http://localhost/thread/delete' );
 
-        # # access thread contents
-        # expect_res( 200, $cb, GET => 'http://localhost/thread/:GUID_FOR_TEST_THREAD' );
-    };
+            # # access thread contents
+            # expect_res( 200, $cb, GET => 'http://localhost/thread/:ID_FOR_TEST_THREAD' );
+        };
+
+    $mech->get_ok('/');
+    $mech->title_is('TenyBBS');
+    $mech->content_contains('Write your title here');
+};
 
 done_testing;
