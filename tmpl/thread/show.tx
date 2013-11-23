@@ -1,0 +1,40 @@
+: cascade "include/layout.tx"
+
+: override content -> {
+
+<div>
+  <h3><: $thread.title :></h3>
+
+  <div class="row">
+    <div class="col-lg-4">
+      <p><: $thread.content :></p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-4">
+      <form class="form-inline" role="form" method="POST" action="<: uri_for('/thread/' ~ $thread.id ~ '/response') :>">
+        <div class="form-group">
+          <label class="sr-only" for="form-title">Content</label>
+          <input id="form-content" type="text" class="form-control" name="content">
+        </div>
+        <button class="btn btn-default" type="submit">Submit</button>
+      </form>
+    </div>
+  </div>
+
+</div>
+
+
+<div class="row comments">
+  <div class="col-lg-4">
+: for $responses -> $response {
+    <div>
+      <p><: $response.content :></p>
+    </div>
+: }
+  </div>
+</div>
+
+
+: }

@@ -11,6 +11,21 @@ footer {
         font-weight: bold;
     }
 
+.thread {
+  border-top: solid 1px #aaa;
+}
+.thread:nth-last-of-type(1) {
+  border-bottom: solid 1px #aaa;
+}
+
+
+
+
+.comments {
+  margin-top: 60px;
+}
+
+
 /* smart phones */
 @media screen and (max-device-width: 480px) {
 }
