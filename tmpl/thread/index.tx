@@ -4,13 +4,15 @@
 
 <h1>Threads</h1>
 <a href="<: uri_for('/thread/new') :>">new thread</a>
-<ul>
+
+<br>
+<br>
+
 : for $threads -> $th {
-  <li><a href="<: uri_for('/thread/' ~ $th.id) :>"><: $th.title :></a></li>
-  <ul>
-    <li><: $th.content :></li>
-  </ul>
+  <div class="thread">
+    <h3><a href="<: uri_for('/thread/' ~ $th.id) :>"><: $th.title :></a></h3>
+    <p><: $th.content :></p>
+  </div>
 : }
-</ul>
 
 : }
