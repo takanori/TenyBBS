@@ -7,7 +7,7 @@
 
 <h3>Create Thread</h3>
 
-<form method="post" action="thread/insert">
+<form method="post" action="memo/create">
 	Thread Title: <input type="text" name="title" class="form-control " placeholder="Thread Title">
 	Contents: <textarea name="content" class="form-control" rows="3">Write how you're feeling!</textarea>
 	Nickname: <input name="author_name" type="text" class="form-control " placeholder="Nickname"><br/>
