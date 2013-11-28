@@ -8,7 +8,7 @@ use Test::More;
 use Test::WWW::Mechanize::PSGI;
 
 my $app = Plack::Util::load_psgi 'script/tenybbs-server';
-my $mech = Test::WWW::Mechanize::PSGI->new(app => $app);
+my $mech = Test::WWW::Mechanize::PSGI->new( app => $app );
 
 sub expect_res {
     my ( $stat, $cb, $method, $url ) = @_;

@@ -5,10 +5,12 @@ use t::Util;
 use Plack::Test;
 use Plack::Util;
 use Test::More;
-
-my $app = Plack::Util::load_psgi 'script/tenybbs-server';
+use Test::WWW::Mechanize::PSGI;
 
 plan skip_all => 'not yet';
+
+my $app = Plack::Util::load_psgi 'script/tenybbs-server';
+my $mech = Test::WWW::Mechanize::PSGI->new( app => $app );
 
 sub expect_res {
     my ( $stat, $cb, $method, $url ) = @_;
@@ -22,6 +24,8 @@ test_psgi
     app    => $app,
     client => sub {
         my $cb = shift;
+
+        expect_res( 200, $cb, GET => '/')
 
         # TODO 
         # expect_res( 200, $cb, GET => 'http://localhost/thread/:GUID_FOR_TEST_THREAD/insert' );

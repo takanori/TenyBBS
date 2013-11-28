@@ -2626,6 +2626,18 @@ DISTRIBUTIONS
       Test::More 0
       Tree::DAG_Node 1.02
       perl 5.006
+  Test-mysqld-0.17
+    pathname: K/KA/KAZUHO/Test-mysqld-0.17.tar.gz
+    provides:
+      Test::mysqld 0.17
+    requirements:
+      Class::Accessor::Lite 0
+      DBD::mysql 0
+      DBI 0
+      ExtUtils::MakeMaker 6.42
+      File::Copy::Recursive 0
+      Test::SharedFork 0.06
+      perl 5.008
   Text-Xslate-3.0.1
     pathname: G/GF/GFUJI/Text-Xslate-3.0.1.tar.gz
     provides:
