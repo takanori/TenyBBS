@@ -1,12 +1,9 @@
-use File::Spec;
-use File::Basename qw(dirname);
-my $basedir = File::Spec->rel2abs(File::Spec->catdir(dirname(__FILE__), '..'));
-my $dbpath = File::Spec->catfile($basedir, 'db', 'test.db');
+# TODO
 +{
     'DBI' => [
-        "dbi:SQLite:dbname=$dbpath", '', '',
-        +{
-            sqlite_unicode => 1,
-        }
+        "dbi:mysql:tenybbs",
+        'YourUserName',
+        'YourPassword',
+		+{ mysql_enable_utf8 => 1 },
     ],
 };
